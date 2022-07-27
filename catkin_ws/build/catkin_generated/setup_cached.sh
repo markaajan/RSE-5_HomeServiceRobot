@@ -5,9 +5,13 @@
 # it emulates the modifications of the setup script without recurring computations
 
 # new environment variables
+export TURTLEBOT_GAZEBO_MAP_FILE="/root/temp/catkin_ws/src/turtlebot_simulator/turtlebot_gazebo/maps/playground.yaml"
+export TURTLEBOT_GAZEBO_WORLD_FILE="/root/temp/catkin_ws/src/turtlebot_simulator/turtlebot_gazebo/worlds/playground.world"
+export TURTLEBOT_STAGE_MAP_FILE="/root/temp/catkin_ws/src/turtlebot_simulator/turtlebot_stage/maps/maze.yaml"
+export TURTLEBOT_STAGE_WORLD_FILE="/root/temp/catkin_ws/src/turtlebot_simulator/turtlebot_stage/maps/stage/maze.world"
+export TURTLEBOT_STDR_MAP_FILE="/root/temp/catkin_ws/src/turtlebot_simulator/turtlebot_stdr/maps/sparse_obstacles.yaml"
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/root/catkin_ws/devel:$CMAKE_PREFIX_PATH"
-export PWD="/root/catkin_ws/build"
-export ROSLISP_PACKAGE_DIRECTORIES="/root/catkin_ws/devel/share/common-lisp"
-export ROS_PACKAGE_PATH="/root/catkin_ws/src:$ROS_PACKAGE_PATH"
+export PKG_CONFIG_PATH="/root/temp/catkin_ws/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PWD="/root/temp/catkin_ws/build"
+export ROS_PACKAGE_PATH="/root/temp/catkin_ws/src:/opt/ros/kinetic/share"
