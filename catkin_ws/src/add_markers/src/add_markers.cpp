@@ -3,23 +3,28 @@
 #include <std_msgs/Int16.h>
 
 int status = 0;
-void state_callback(const std_msgs::Int16::ConstPtr& msg)
+
+void state_callback(const std_msgs::Int16 msg)
 {
-  status = msg->data;
+  ROS_INFO("Callback");
+  status = msg.data;
+
 }
 
 int main( int argc, char** argv )
 {
   ros::init(argc, argv, "add_markers");
   ros::NodeHandle n;
-  ros::Rate r(1);
+  ros::Rate r(100);
+  ros::Subscriber status_sub = n.subscribe<std_msgs::Int16>("/current_status", 1000,state_callback);
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
-  ros::Subscriber status_sub = n.subscribe("current_status", 1,state_callback);
+  
   // Set our initial shape type to be a cube
   uint32_t shape = visualization_msgs::Marker::SPHERE;
 
   while (ros::ok())
   {
+
     visualization_msgs::Marker marker;
     // Set the frame ID and timestamp.  See the TF tutorials for information on these.
     marker.header.frame_id = "map";
@@ -37,6 +42,7 @@ int main( int argc, char** argv )
     marker.action = visualization_msgs::Marker::ADD;
     if (status == 0)
     {
+      ROS_INFO("State 0");
       // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
       marker.pose.position.x = 1.22068214417;
       marker.pose.position.y = 0.562308967113;
@@ -60,6 +66,7 @@ int main( int argc, char** argv )
 
     else if (status == 1)
     {
+      ROS_INFO("State 1");
       // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
       marker.pose.position.x = 1.22068214417;
       marker.pose.position.y = 0.562308967113;
@@ -83,6 +90,7 @@ int main( int argc, char** argv )
 
     else if (status == 2)
     {
+      ROS_INFO("State 2");
       // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
       marker.pose.position.x = 1.22068214417;
       marker.pose.position.y = 0.562308967113;
@@ -106,6 +114,7 @@ int main( int argc, char** argv )
 
     else if (status == 3)
     {
+      ROS_INFO("State 3");
       // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
       marker.pose.position.x = -1.66772055626;
       marker.pose.position.y = -2.02861714363;
@@ -124,12 +133,13 @@ int main( int argc, char** argv )
       marker.color.r = 0.0f;
       marker.color.g = 1.0f;
       marker.color.b = 0.0f;
-      marker.color.a = 0.0;
+      marker.color.a = 1.0;
     }
     marker.lifetime = ros::Duration();
 
     marker_pub.publish(marker);
 
     r.sleep();
+    ros::spinOnce();
   }
 }

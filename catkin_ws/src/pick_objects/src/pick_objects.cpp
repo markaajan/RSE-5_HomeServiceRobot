@@ -12,7 +12,7 @@ int main(int argc, char** argv){
   // Initialize the simple_navigation_goals node
   ros::init(argc, argv, "pick_objects");
   ros::NodeHandle n;
-  ros::Publisher status_pub = n.advertise<std_msgs::Int16>("current_status", 1);
+  ros::Publisher status_pub = n.advertise<std_msgs::Int16>("/current_status", 1000);
 
   //tell the action client that we want to spin a thread by default
   MoveBaseClient ac("move_base", true);
@@ -51,6 +51,7 @@ int main(int argc, char** argv){
   if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
     {
       status.data = 1;
+      for (int i = 0;i <1000;i++)
       status_pub.publish(status);
     }
   else
