@@ -53,6 +53,7 @@ int main(int argc, char** argv){
       status.data = 1;
       for (int i = 0;i <1000;i++)
       status_pub.publish(status);
+      ROS_INFO("Pickup Zone Reached");
     }
   else
     ROS_INFO("Move_failed");
@@ -83,6 +84,7 @@ int main(int argc, char** argv){
     {
       status.data = 3;
       status_pub.publish(status);
+      ROS_INFO("Dropoff Zone Reached");
     }
   else
     ROS_INFO("Move_failed");
