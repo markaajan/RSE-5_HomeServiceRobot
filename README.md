@@ -7,6 +7,12 @@ Final Project of the Robotic Software Engineering Nanodegree
 
 git clone https://github.com/markaajan/RSE-5_HomeServiceRobot.git
 
+cd RSE-5_HomeServiceRobot/
+
+git submodule init 
+
+git submodule update
+
 cd RSE-5_HomeServiceRobot/catkin_ws
 
 catkin_make
